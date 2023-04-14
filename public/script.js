@@ -13,6 +13,8 @@ document.getElementById("join-btn").addEventListener("click", (event) => {
     document.querySelector(
       ".chatroom-header"
     ).innerText = `Chatroom - ${username}`;
+
+    socket.emit("username enter", username);
   } else {
     alert("Username cannot be empty");
   }
@@ -32,7 +34,16 @@ document.getElementById("send-btn").addEventListener("click", (event) => {
   addMessage(data, true);
 });
 
-// receive messages
+// receive user enterred
+socket.on("username enter", (data) => {
+  if (data !== username) {
+    var msgDiv = document.createElement("div");
+    msgDiv.innerText = `${data} has enterred!`;
+    document.querySelector("#messages-container").appendChild(msgDiv);
+  }
+});
+
+// receive message
 socket.on("message", (data) => {
   if (data.username !== username) {
     addMessage(data, false);

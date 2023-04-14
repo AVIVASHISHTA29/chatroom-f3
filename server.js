@@ -27,6 +27,11 @@ io.on("connection", (socket) => {
     console.log("Message is being sent to everyone", data.message);
   });
 
+  socket.on("username enter", (data) => {
+    // watchman emits to everyone
+    io.emit("username enter", data);
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
   });
