@@ -63,3 +63,16 @@ function addMessage(data, flag) {
 }
 
 // function if some sender sends a message , receive that message and append  child
+
+document.getElementById("exit-btn").addEventListener("click", () => {
+  socket.emit("username left", username);
+});
+
+// receive message
+socket.on("username left", (data) => {
+  if (data !== username) {
+    var msgDiv = document.createElement("div");
+    msgDiv.innerText = `${data} has left!`;
+    document.querySelector("#messages-container").appendChild(msgDiv);
+  }
+});

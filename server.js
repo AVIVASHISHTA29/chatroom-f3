@@ -23,13 +23,17 @@ io.on("connection", (socket) => {
 
   socket.on("message", (data) => {
     // watchman emits to everyone
-    io.emit("message", data);
+    io.emit("message", datas);
     console.log("Message is being sent to everyone", data.message);
   });
 
   socket.on("username enter", (data) => {
     // watchman emits to everyone
     io.emit("username enter", data);
+  });
+
+  socket.on("username left", (data) => {
+    io.emit("username left", data);
   });
 
   socket.on("disconnect", () => {
